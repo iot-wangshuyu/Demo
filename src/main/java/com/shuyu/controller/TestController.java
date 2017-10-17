@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shuyu.service.TestService;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 
 @Controller
-@RequestMapping("test")
+@RequestMapping(value="/test")
+@Api(value="test",description="测试接口描述")
 public class TestController {
 	
 	
@@ -29,8 +32,9 @@ public class TestController {
 	/**
 	 * @Title: getHeader @Description: TODO @param @return @return String @throws
 	 */
-	@RequestMapping("header")
+	@RequestMapping(value="/header")
 	@ResponseBody
+	@ApiOperation(value="根据header户信息",httpMethod="GET",notes="get user by id") 
 	public Map<String, Object> getHeader() {
 		Map<String, Object> map=new HashMap<>();
 		map.put("header", getHeadersInfo());
@@ -38,8 +42,9 @@ public class TestController {
 		return map;
 	}
 	
-	@RequestMapping("sql")
+	@RequestMapping(value="/sql")
 	@ResponseBody
+	@ApiOperation(value="数据库查询",httpMethod="GET",notes="mysql数据库查询操作") 
 	public List<Map<String, String>> getSql(@RequestParam(value="name",required=true)String name) {
 		System.out.println(getToken());
 		return service.query(name);

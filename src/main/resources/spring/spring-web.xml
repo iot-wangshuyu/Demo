@@ -18,6 +18,8 @@
 	<!--servlet-mapping 映射路径："/" -->
 	<!--2：静态资源默认servlet配置 1:加入对静态资源的处理：js，gif,png 2:允许使用"/"做整体映射 -->
 	<mvc:default-servlet-handler />
+	
+	
 
 	<!-- 3：配置jsp,显示viewResolver -->
 	<bean
@@ -31,5 +33,12 @@
 	<!-- 4:扫描web相关的bean -->
 
 	<context:component-scan base-package="com.shuyu.controller" />
-
+	
+	<!--整合 Swagger -->
+	<!-- 将 springSwaggerConfig加载到spring容器 -->  
+    <bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />  
+    <!-- 将自定义的swagger配置类加载到spring容器 -->  
+    <bean class="com.shuyu.config.SwaggerConfig" />  
+    <!-- 静态资源文件，不会被Spring MVC拦截 -->
+    <mvc:resources mapping="/swagger/**" location="/swagger/" />
 </beans>
