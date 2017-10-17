@@ -6,7 +6,7 @@ import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisUtil {
 	/** 
-	 * ����Ƭ���ӳ�
+	 * 非切片链接池
 	 * 
 	 */
 	private JedisPool jedisPool;
@@ -14,11 +14,11 @@ public class RedisUtil {
 	private String ip = "127.0.0.1";
 
 	/**
-	 * ����Ƭ���ӳس�ʼ��
+	 * 非切片连接池初始化
 	 */
 	private JedisPool initialPool() {
 
-		// �ػ�������
+		// 池基本配置
 
 		JedisPoolConfig config = new JedisPoolConfig();
 
@@ -36,7 +36,7 @@ public class RedisUtil {
 	}
 
 	/**
-	 * �ڶ��̻߳���ͬ����ʼ��
+	 * 在多线程环境同步初始化
 	 * 
 	 */
 	private synchronized void poolInit() {
@@ -50,7 +50,7 @@ public class RedisUtil {
 	}
 
 	/**
-	 * ����Ƭ�ͻ������� ͬ����ȡ����ƬJedisʵ��
+	 * 非切片客户端链接 同步获取非切片Jedis实例
 	 * @return Jedis
 	 * 
 	 */
@@ -69,10 +69,10 @@ public class RedisUtil {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			// �ͷ�jedis����
+			// 释放jedis对象
 			jedisPool.returnBrokenResource(jedis);
 		} finally {
-			// �������ӳ�
+			// 返还连接池
 			if (jedis != null && jedisPool != null) {
 				jedisPool.returnResource(jedis);
 
@@ -85,7 +85,7 @@ public class RedisUtil {
 	}
 
 	/**
-	 * �ͷ�jedis��Դ
+	 * 释放jedis资源
 	 * @param jedis
 	 * 
 	 */

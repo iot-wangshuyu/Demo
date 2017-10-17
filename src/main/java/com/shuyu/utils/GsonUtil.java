@@ -19,9 +19,9 @@ import com.google.gson.reflect.TypeToken;
 /**
  * @Title: GsonUtil.java 
  * @Package com.hc.utils 
- * @Description: gsonת��������
+ * @Description: gson转换工具类
  * @author Shuyu.Wang
- * @date Creation time: 2017��9��4��
+ * @date Creation time: 2017年9月4日
  * @version V1.0   
  */
 public class GsonUtil {
@@ -128,7 +128,7 @@ public class GsonUtil {
 	
 	/** 
 	* @Title: GetValue 
-	* @Description: TODO(������һ�仰�����������������) 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param json
 	* @param key
 	* @return String
@@ -146,7 +146,7 @@ public class GsonUtil {
 	
 	/** 
 	* @Title: parse 
-	* @Description: TODO(������һ�仰�����������������) 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param param
 	* @return JsonObject
 	*/

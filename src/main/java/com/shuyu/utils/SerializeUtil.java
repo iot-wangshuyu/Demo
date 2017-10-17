@@ -7,13 +7,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * ���л�������
+ * 序列化工具类
  * @author Shuyu.Wang
  *
  */
 public class SerializeUtil {
 	/**
-	 * ���л�
+	 * 序列化
 	 * @param value
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public class SerializeUtil {
 
 	}
 
-	/**�����л�
+	/**反序列化
 	 * @param bytes
 	 * @return
 	 */

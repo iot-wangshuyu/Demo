@@ -14,7 +14,6 @@
 package com.shuyu.utils;
 
 /**
- * @author Wenming.Huang
  * @date 2017-5-16
  */
 public enum ResultMessage {

@@ -23,9 +23,9 @@ import java.util.regex.Matcher;
 /**
  * @Title: MybatisInterceptor.java 
  * @Package com.hc.utils 
- * @Description: ���ش�ӡ����sql���
+ * @Description: 拦截打印完整sql语句
  * @author Shuyu.Wang
- * @date Creation time: 2017��9��4��
+ * @date Creation time: 2017年9月4日
  * @version V1.0   
  */
 @Intercepts({ @Signature(type = Executor.class, method = "update", args = { MappedStatement.class, Object.class }),
@@ -105,8 +105,8 @@ public class MybatisInterceptor implements Interceptor {
 						Object obj = boundSql.getAdditionalParameter(propertyName);
 						sql = sql.replaceFirst("\\?", Matcher.quoteReplacement(getParameterValue(obj)));
 					} else {
-						sql = sql.replaceFirst("\\?", "ȱʧ");
-					} // ��ӡ��ȱʧ�����Ѹò���ȱʧ����ֹ��λ
+						sql = sql.replaceFirst("\\?", "缺失");
+					} // 打印出缺失，提醒该参数缺失并防止错位
 				}
 			}
 		}
