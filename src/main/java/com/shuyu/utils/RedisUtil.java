@@ -5,7 +5,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisUtil {
-	/** 
+	/**
 	 * 非切片链接池
 	 * 
 	 */
@@ -51,6 +51,7 @@ public class RedisUtil {
 
 	/**
 	 * 非切片客户端链接 同步获取非切片Jedis实例
+	 * 
 	 * @return Jedis
 	 * 
 	 */
@@ -64,10 +65,11 @@ public class RedisUtil {
 			if (jedisPool != null) {
 
 				jedis = jedisPool.getResource();
-				// jedis.auth(redisCacheConfig.getAuth());
+				// jedis.auth(password);
 			}
 
 		} catch (Exception e) {
+			System.out.println("抛错");
 			e.printStackTrace();
 			// 释放jedis对象
 			jedisPool.returnBrokenResource(jedis);
@@ -81,23 +83,6 @@ public class RedisUtil {
 		}
 
 		return jedis;
-
-	}
-
-	/**
-	 * 释放jedis资源
-	 * @param jedis
-	 * 
-	 */
-	@SuppressWarnings("deprecation")
-
-	public void returnResource(JedisPool pool, Jedis redis) {
-
-		if (redis != null && pool != null) {
-			pool.returnResource(redis);
-			// pool.returnResourceObject(redis);
-
-		}
 
 	}
 
