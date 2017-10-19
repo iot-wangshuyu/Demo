@@ -79,7 +79,7 @@ public class RedisTest {
 
 	@Test
 	public void testSetInteger() {
-		dao.SetInteger("int", 10);
+		dao.setInteger("int", 10);
 	}
 
 	@Test
@@ -117,7 +117,7 @@ public class RedisTest {
 
 	@Test
 	public void testValidate() {
-		System.out.println("testValidate   "+dao.validate("lc_vc_123456"));
+//		System.out.println("testValidate   "+dao.validate("lc_vc_123456"));
 	}
 
 	@Test

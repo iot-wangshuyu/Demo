@@ -63,7 +63,7 @@ public class LoginFilter implements Filter {
 		String token = getToken(request);
 		if (token==null||"".equals(token)) {
 			response.setContentType( "text/json;charset=UTF-8");
-			Map<String, String> map=new HashMap<>();
+			Map<String, String> map=new HashMap<>(16);
 			PrintWriter out = response.getWriter();
 			map.put("message", "请先登录");
 		    out.write(GsonUtil.GsonString(map));

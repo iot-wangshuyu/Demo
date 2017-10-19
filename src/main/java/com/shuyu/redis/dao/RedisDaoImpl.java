@@ -3,23 +3,27 @@ package com.shuyu.redis.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.mangofactory.swagger.core.SwaggerApiResourceListing;
 import com.shuyu.utils.RedisUtil;
 import com.shuyu.utils.SerializeUtil;
 
 import redis.clients.jedis.Jedis;
 
+
 /**
- * @author Administrator
- *
- */
-/**
- * @author Administrator
- *
+ * @ClassName: RedisDaoImpl 
+ * @Description: TODO
+ * @author shuyu.wang
+ * @date 2017年10月19日 下午2:54:39 
+ * @version V1.0
  */
 public class RedisDaoImpl implements RedisDao {
 	private static final String VIRTUAL_COURSE_PREX = "lc_vc_";
 
 	private RedisUtil redisUtil = new RedisUtil();
+	
+	private static final String RETURN_OK="OK";
+	
 
 	/**
 	 * 
@@ -36,6 +40,7 @@ public class RedisDaoImpl implements RedisDao {
 	 * @see com.shuyu.cache.RedisDao#setString(java.lang.String, int,
 	 * java.lang.String)
 	 */
+	@Override
 	public void setString(String key, int seconds, String value) {
 		Jedis jedis = redisUtil.getJedis();
 		jedis.setex(buildKey(key), seconds, value);
@@ -47,6 +52,7 @@ public class RedisDaoImpl implements RedisDao {
 	 * 
 	 * @see com.shuyu.cache.RedisDao#exist(java.lang.String)
 	 */
+	@Override
 	public boolean exist(String key) {
 		Jedis jedis = redisUtil.getJedis();
 		String bKey = buildKey(key);
@@ -61,13 +67,14 @@ public class RedisDaoImpl implements RedisDao {
 	 * @param key
 	 * @param param
 	 */
+	@Override
 	public <T> boolean setString(String key, String param) {
 
 		Jedis jedis = redisUtil.getJedis();
 		String bKey = buildKey(key);
 		String set = null;
 		set = jedis.set(bKey.getBytes(), SerializeUtil.serialize(param));
-		if (!set.isEmpty() && ("OK").equals(set)) {
+		if (!set.isEmpty() && (RETURN_OK).equals(set)) {
 			return true;
 		} else {
 			return false;
@@ -81,6 +88,7 @@ public class RedisDaoImpl implements RedisDao {
 	 * @param key
 	 * @return String
 	 */
+	@Override
 	public String getString(String key) {
 		Jedis jedis = redisUtil.getJedis();
 		String bKey = buildKey(key);
@@ -99,12 +107,13 @@ public class RedisDaoImpl implements RedisDao {
 	 * @param key
 	 * @param bean
 	 */
+	@Override
 	public <T> boolean setBean(String key, Object bean) {
 		String bKey = buildKey(key);
 		Jedis jedis = redisUtil.getJedis();
 		String set = null;
 		set = jedis.set(bKey.getBytes(), SerializeUtil.serialize(bean));
-		if (!set.isEmpty() && ("OK").equals(set)) {
+		if (!set.isEmpty() && (RETURN_OK).equals(set)) {
 			return true;
 		} else {
 			return false;
@@ -118,6 +127,7 @@ public class RedisDaoImpl implements RedisDao {
 	 * @return T
 	 */
 	@SuppressWarnings("unchecked")
+	@Override
 	public <T> T getBean(String key) {
 		Jedis jedis = redisUtil.getJedis();
 		String bKey = buildKey(key);
@@ -135,13 +145,13 @@ public class RedisDaoImpl implements RedisDao {
 	 * @param key
 	 * @param list
 	 */
-
+	@Override
 	public <T> boolean setList(String key, List<T> list) {
 		Jedis jedis = redisUtil.getJedis();
 		String bKey = buildKey(key);
 		String set = null;
 		set = jedis.set(bKey.getBytes(), SerializeUtil.serialize(list));
-		if (!set.isEmpty() && ("OK").equals(set)) {
+		if (!set.isEmpty() && (RETURN_OK).equals(set)) {
 			return true;
 		} else {
 			return false;
@@ -155,6 +165,7 @@ public class RedisDaoImpl implements RedisDao {
 	 * @return list
 	 */
 	@SuppressWarnings("unchecked")
+	@Override
 	public <T> List<T> getList(String key) {
 		Jedis jedis = redisUtil.getJedis();
 		String bKey = buildKey(key);
@@ -173,12 +184,13 @@ public class RedisDaoImpl implements RedisDao {
 	 * @param <T>
 	 * @param key
 	 */
+	@Override
 	public <T> boolean setMap(String key, Map<String, T> map) {
 		String bKey = buildKey(key);
 		Jedis jedis = redisUtil.getJedis();
 		String set = null;
 		set = jedis.set(bKey.getBytes(), SerializeUtil.serialize(map));
-		if (!set.isEmpty() && ("OK").equals(set)) {
+		if (!set.isEmpty() && (RETURN_OK).equals(set)) {
 			return true;
 		} else {
 			return false;
@@ -191,6 +203,7 @@ public class RedisDaoImpl implements RedisDao {
 	 * @param key
 	 * @return Map
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> Map<String, T> getMap(String key) {
 		String bKey = buildKey(key);
@@ -220,12 +233,12 @@ public class RedisDaoImpl implements RedisDao {
 	}
 
 	@Override
-	public <T> boolean SetInteger(String key, Integer num) {
+	public <T> boolean setInteger(String key, Integer num) {
 		Jedis jedis = redisUtil.getJedis();
 		String bKey = buildKey(key);
 		String set = null;
 		set = jedis.set(bKey, String.valueOf(num));
-		if (!set.isEmpty() && ("OK").equals(set)) {
+		if (!set.isEmpty() && (RETURN_OK).equals(set)) {
 			return true;
 		} else {
 			return false;
@@ -260,7 +273,7 @@ public class RedisDaoImpl implements RedisDao {
 		Jedis jedis = redisUtil.getJedis();
 		String hmset = null;
 		hmset = jedis.hmset(bKey, map);
-		if (!hmset.isEmpty() && ("OK").equals(hmset)) {
+		if (!hmset.isEmpty() && (RETURN_OK).equals(hmset)) {
 			return true;
 		} else {
 			return false;
@@ -317,7 +330,8 @@ public class RedisDaoImpl implements RedisDao {
 		if (jedis == null || !jedis.exists(token)) {
 			flag = false;
 		} else {
-			jedis.expire(token, 30 * 24 * 60 * 60);
+			//重新设置有效时间
+			jedis.expire(token, 10);
 			flag = true;
 		}
 		return flag;

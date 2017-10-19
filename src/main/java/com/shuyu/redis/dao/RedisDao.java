@@ -77,7 +77,7 @@ public interface RedisDao {
 	 * @param num
 	 * @return
 	 */
-	public <T> boolean SetInteger(String key,Integer num);
+	public <T> boolean setInteger(String key,Integer num);
 	
 	/**
 	 * @param key

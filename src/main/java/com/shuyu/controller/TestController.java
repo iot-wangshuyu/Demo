@@ -15,6 +15,13 @@ import com.shuyu.service.TestService;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 
+/**
+ * @ClassName: TestController 
+ * @Description: TODO
+ * @author shuyu.wang
+ * @date 2017年10月19日 下午2:53:49 
+ * @version V1.0
+ */
 @Controller
 @RequestMapping(value="/test")
 @Api(value="test",description="测试接口描述")
@@ -29,7 +36,7 @@ public class TestController {
 	@ResponseBody
 	@ApiOperation(value="根据header户信息",httpMethod="GET",notes="get user by id") 
 	public Map<String, Object> getHeader() {
-		Map<String, Object> map=new HashMap<>();
+		Map<String, Object> map=new HashMap<>(16);
 		return map;
 	}
 	
