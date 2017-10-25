@@ -50,4 +50,5 @@
 			<bean class="com.shuyu.interceptors.AccessInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
 </beans>

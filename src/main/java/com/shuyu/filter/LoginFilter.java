@@ -61,15 +61,15 @@ public class LoginFilter implements Filter {
 		// response.setHeader("Access-Control-Max-Age", "3600");
 		// response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
 		String token = getToken(request);
-		if (token==null||"".equals(token)) {
-			response.setContentType( "text/json;charset=UTF-8");
-			Map<String, String> map=new HashMap<>(16);
-			PrintWriter out = response.getWriter();
-			map.put("message", "请先登录");
-		    out.write(GsonUtil.GsonString(map));
-		    out.close();
-		    return;
-		}
+//		if (token==null||"".equals(token)) {
+//			response.setContentType( "text/json;charset=UTF-8");
+//			Map<String, String> map=new HashMap<>(16);
+//			PrintWriter out = response.getWriter();
+//			map.put("message", "请先登录");
+//		    out.write(GsonUtil.GsonString(map));
+//		    out.close();
+//		    return;
+//		}
 		//该方法的调用会将请求转发给下一个过滤器或目标资源
 	    chain.doFilter(req,res);
 	}
