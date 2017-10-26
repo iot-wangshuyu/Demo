@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd    
+     http://www.springframework.org/schema/context    
+     http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true"/>
+    
+	<!--==================== redis配置 start ==================== -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="${redis.maxTotal}" />
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${redis.minEvictableIdleTimeMillis}" />
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+	</bean>
+
+	<bean id="jedisClusterFactory" class="com.shuyu.utils.JedisClusterFactory">
+		<constructor-arg ref="jedisPoolConfig" />
+		<constructor-arg name="host" value="${redis.host}" />
+		<constructor-arg name="port" value="${redis.port}" />
+	</bean>
+
+	<bean id="redisProvide" class="com.shuyu.redis.cluster.RedisProvide">
+		<constructor-arg ref="jedisClusterFactory" />
+	</bean>
+
+	<!--==================== redis配置 end ==================== -->
+
+
+</beans>

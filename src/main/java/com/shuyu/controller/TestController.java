@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shuyu.activemq.service.ActiveMqService;
-import com.shuyu.entity.User;
+import com.shuyu.redis.cluster.CacheSecondLevel;
+import com.shuyu.redis.cluster.RedisProvide;
 import com.shuyu.service.TestService;
 import com.shuyu.utils.GsonUtil;
 import com.wordnik.swagger.annotations.Api;
@@ -41,6 +42,9 @@ public class TestController {
 	@Autowired
 	@Qualifier(value="topicServiceImpl")
 	private ActiveMqService topic;
+	@Autowired
+	@Qualifier(value="redisProvide")
+	private CacheSecondLevel redis;
 
 	/**
 	 * @Title: getHeader @Description: TODO @param @return @return String @throws
@@ -73,6 +77,15 @@ public class TestController {
 //		System.out.println("入参"+GsonUtil.GsonString(user));
 		topic.push("topic.user",message);
 		return GsonUtil.GsonString(message);
+	}
+	
+	
+	@RequestMapping(value="/redis",method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public String redis(String key,String value) {
+//		System.out.println("入参"+GsonUtil.GsonString(user));
+		redis.set(key, value);
+		return redis.get(key).toString();
 	}
 
 
