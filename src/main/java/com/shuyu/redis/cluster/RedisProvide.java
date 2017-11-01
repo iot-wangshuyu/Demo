@@ -1,11 +1,14 @@
 package com.shuyu.redis.cluster;
 
 
+import org.springframework.stereotype.Service;
+
 import com.shuyu.utils.JedisClusterFactory;
 
 import redis.clients.jedis.JedisCluster;
 
 public class RedisProvide implements CacheSecondLevel{
+	
 	private JedisCluster jedisCluster;
 
 	public RedisProvide(JedisClusterFactory jedisClusterFactory){
